@@ -1,0 +1,47 @@
+/* Local-only, versioned progress. No network calls or analytics. */
+window.QuestProgress=(()=>{
+'use strict';
+const KEY='aidens-world-quest-v3',DAY=86400000;
+let db=null,live=null,storageOK=false,lastSaved='',onSwitch=()=>{};
+const clone=x=>JSON.parse(JSON.stringify(x));
+const str=(x,n=120)=>typeof x==='string'?x.slice(0,n):'';
+const num=(x,a,b,d=0)=>Number.isFinite(x)?Math.max(a,Math.min(b,x)):d;
+function fresh(){return {v:3,trailPoints:0,paths:{},field:{},atlas:{},ledger:{},wordRecords:{},reviews:{},journal:[],goals:{},sessions:[],runBest:{},practiceCount:0,printCount:0,activities:0,tier:2,adaptive:true,window:false,ruler:false,fontScale:1,rate:.9,breakMinutes:10,lastBreak:Date.now(),lastActivity:'',memoryPaid:false,battleClean:{},guideClean:{},completedMissions:[],onboarded:false};}
+const bools=(a,n)=>Array.from({length:n},(_,i)=>!!a?.[i]);
+function safeG(input){const g=Object.assign(fresh(),input&&typeof input==='object'&&!Array.isArray(input)?input:{});g.v=3;
+for(const k of ['trailPoints','practiceCount','printCount','activities'])g[k]=Math.floor(num(g[k],0,1e7));
+g.tier=Math.floor(num(g.tier,1,3,2));g.fontScale=num(g.fontScale,.9,1.4,1);g.rate=num(g.rate,.7,1.15,.9);g.breakMinutes=num(g.breakMinutes,5,30,10);
+for(const k of ['paths','field','atlas','ledger','wordRecords','reviews','goals','runBest','battleClean','guideClean']){const x=g[k];g[k]=x&&typeof x==='object'&&!Array.isArray(x)?x:{};if(Object.keys(g[k]).length>300)throw Error('This backup contains too many records.');}
+for(const [id,r] of Object.entries(g.ledger)){if(!/^\d-\d$/.test(id)||!r||typeof r!=='object')throw Error('Invalid story record.');r.page=Math.floor(num(r.page,0,2));r.tries=Math.floor(num(r.tries,0,99));r.wrongs=Math.floor(num(r.wrongs,0,99));r.variant=Math.floor(num(r.variant,0,1));r.stage=['read','check','evidence','review','guided','done'].includes(r.stage)?r.stage:'read';r.events=Array.isArray(r.events)?r.events.slice(-30):[];}
+for(const [id,r] of Object.entries(g.wordRecords)){if(!/^\d{1,2}$/.test(id)||!r||typeof r!=='object')throw Error('Invalid word record.');r.dates=Array.isArray(r.dates)?r.dates.filter(x=>/^\d{4}-\d\d-\d\d$/.test(x)).slice(-30):[];r.attempts=Math.floor(num(r.attempts,0,1e5));r.independent=Math.floor(num(r.independent,0,1e5));}
+g.journal=Array.isArray(g.journal)?g.journal.slice(-90).map(r=>({date:str(r.date,10),feeling:str(r.feeling,30),gratitude:str(r.gratitude,240),yet:str(r.yet,240),strategy:str(r.strategy,100),confidence:str(r.confidence,30)})):[];
+g.sessions=Array.isArray(g.sessions)?g.sessions.slice(-200):[];g.completedMissions=Array.isArray(g.completedMissions)?g.completedMissions.filter(x=>typeof x==='string').slice(-100):[];
+return g;}
+function safeState(s){if(!s||typeof s!=='object'||Array.isArray(s))throw Error('This is not a game save.');if(!Number.isInteger(s.done)||s.done<0||s.done>18)throw Error('Invalid key count.');
+const out={done:s.done,buddy:Math.floor(num(s.buddy,-1,11,-1)),read:s.read==='long'?'long':'short',xp:Math.floor(num(s.xp,0,1e7)),route:['trail','area','pets','passport','arcade','camp','parent'].includes(s.route)?s.route:'trail',level:Math.floor(num(s.level,0,5)),memoryWins:Math.floor(num(s.memoryWins,0,1e6))};
+for(const k of ['sound','voice','music','autoRead','motion'])out[k]=s[k]!==false;for(const k of ['comfy','calm'])out[k]=!!s[k];for(const k of ['musicVolume','voiceVolume','sfxVolume'])out[k]=num(s[k],0,1,.65);
+out.badges=bools(s.badges,6).map((v,i)=>v&&s.done>=(i+1)*3);out.side=bools(s.side,6);out.dashPlayed=bools(s.dashPlayed,6);out.dashBest=Array.from({length:6},(_,i)=>Math.floor(num(s.dashBest?.[i],0,1e5)));out.hearts=Array.from({length:12},(_,i)=>Math.floor(num(s.hearts?.[i],0,1e6)));
+if(out.buddy>=0&&(out.buddy<6?out.buddy>=Math.floor(s.done/3):!out.badges[out.buddy-6]))out.buddy=s.done>=3?0:-1;out.g=safeG(s.g);return out;}
+function validate(x){if(!x||x.v!==3||!Array.isArray(x.profiles)||!x.profiles.length||x.profiles.length>6)throw Error('This is not a supported version 3 backup.');
+const ids=new Set();const profiles=x.profiles.map(p=>{if(!p||typeof p.id!=='string'||!/^[a-z0-9_-]{1,40}$/i.test(p.id)||ids.has(p.id))throw Error('Invalid profile.');ids.add(p.id);return {id:p.id,alias:str(p.alias,24)||'Explorer',avatar:Math.floor(num(p.avatar,0,5)),state:safeState(p.state)};});
+if(!ids.has(x.active))throw Error('Active profile missing.');
+const roster=(Array.isArray(x.roster)?x.roster:[]).slice(0,12).map(r=>({id:str(r.id,40),alias:str(r.alias,24)||'Friend',role:str(r.role,80),avatar:Math.floor(num(r.avatar,0,5))}));
+const missions=(Array.isArray(x.missions)?x.missions:[]).slice(0,24).map(m=>({id:str(m.id,40),title:str(m.title,70),text:str(m.text,1600),q:str(m.q,220),options:(Array.isArray(m.options)?m.options:[]).slice(0,3).map(a=>str(a,140)),answer:Math.floor(num(m.answer,0,2)),word:str(m.word,24),kind:m.kind==='story'?'story':'outside',helper:str(m.helper,24)}));
+return {v:3,active:x.active,profiles,roster,missions};}
+function fallback(){return {v:3,active:'aiden',profiles:[{id:'aiden',alias:'Aiden',avatar:0,state:null}],roster:[],missions:[]};}
+function initial(){try{const s=localStorage.getItem(KEY);if(s){db=validate(JSON.parse(s));return clone(db.profiles.find(p=>p.id===db.active).state)}}catch{}db=fallback();return {};}
+function attach(s,sw){live=s;onSwitch=sw;live.g=safeG(live.g);save();}
+function save(){if(!live||!db)return;const p=db.profiles.find(p=>p.id===db.active);if(!p)return;p.state=clone(live);try{localStorage.setItem(KEY,JSON.stringify(db));storageOK=true;lastSaved=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}catch{storageOK=false;}document.dispatchEvent(new CustomEvent('questsaved',{detail:{ok:storageOK}}));}
+function backup(){save();return JSON.stringify(db,null,2);}
+function encode(){save();const data=new TextEncoder().encode(JSON.stringify(db));let s='';for(const b of data)s+=String.fromCharCode(b);return 'AWQ3-'+btoa(s);}
+function decode(text){if(typeof text!=='string'||text.length>700000)throw Error('This backup is too large.');text=text.trim();if(text.startsWith('AWQ3-')){const b=Uint8Array.from(atob(text.slice(5)),c=>c.charCodeAt(0));return validate(JSON.parse(new TextDecoder().decode(b)));}if(text.startsWith('{'))return validate(JSON.parse(text));throw Error('Use an AWQ3 code or a World Quest JSON backup.');}
+function importData(text){const next=decode(text);db=next;Object.assign(live,clone(db.profiles.find(p=>p.id===db.active).state));live.g.lastBreak=Date.now();save();onSwitch();return true;}
+function legacy(text){if(!/^AWQ[12]-/.test(text)||text.length>2000)throw Error('Invalid legacy code.');const x=JSON.parse(atob(text.slice(5)));if(![1,2].includes(x.v)||!Number.isInteger(x.d)||x.d<0||x.d>18||!['short','long'].includes(x.r))throw Error('Invalid legacy data.');const s={...clone(live),done:x.d,buddy:x.b,read:x.r,comfy:x.c,sound:x.s,motion:x.m,hearts:x.h,xp:Number.isFinite(x.x)?x.x:x.d*20,badges:x.bd,side:x.si,dashBest:x.db,dashPlayed:x.dp,memoryWins:x.mw,voice:x.vo,music:x.mu,autoRead:x.ar,musicVolume:x.mv,voiceVolume:x.vv,sfxVolume:x.sv,calm:x.ca,g:fresh()};Object.assign(live,safeState(s));save();onSwitch();}
+function switchProfile(id){save();const p=db.profiles.find(p=>p.id===id);if(!p)return;db.active=id;Object.assign(live,clone(p.state));live.g.lastBreak=Date.now();save();onSwitch();}
+function newProfile(alias){if(db.profiles.length>=6)throw Error('Up to six local explorers fit in this camp.');alias=str(alias.trim(),24);if(!alias)throw Error('Add a nickname first.');save();const s={...clone(live),done:0,buddy:-1,xp:0,badges:Array(6).fill(false),side:Array(6).fill(false),dashBest:Array(6).fill(0),dashPlayed:Array(6).fill(false),memoryWins:0,hearts:Array(12).fill(0),route:'trail',level:0,g:fresh()};const id='p'+Date.now().toString(36);db.profiles.push({id,alias,avatar:db.profiles.length%6,state:s});switchProfile(id);}
+function resetActive(){const p=db.profiles.find(p=>p.id===db.active),s={...clone(live),done:0,buddy:-1,xp:0,badges:Array(6).fill(false),side:Array(6).fill(false),dashBest:Array(6).fill(0),dashPlayed:Array(6).fill(false),memoryWins:0,hearts:Array(12).fill(0),route:'trail',level:0,g:fresh()};p.state=s;Object.assign(live,s);save();onSwitch();}
+function addFriend(x){if(db.roster.length>=12)throw Error('Your local cast has twelve friends already.');db.roster.push({id:'f'+Date.now().toString(36),alias:str(x.alias.trim(),24)||'Friend',role:str(x.role,80),avatar:Math.floor(num(x.avatar,0,5))});save();}
+function addMission(x){if(db.missions.length>=24)throw Error('Your mission book has twenty-four custom missions already.');db.missions.push({...x,id:'m'+Date.now().toString(36)});db=validate(db);save();}
+window.addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+return {initial,attach,save,backup,encode,decode,importData,legacy,switchProfile,newProfile,resetActive,addFriend,addMission,fresh,day:()=>new Date().toLocaleDateString('en-CA'),dayMs:DAY,status:()=>({storageOK,lastSaved,profile:db?.profiles.find(p=>p.id===db.active)?.alias||'Aiden'}),data:()=>db,live:()=>live};
+})();

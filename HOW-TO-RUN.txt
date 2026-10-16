@@ -1,25 +1,44 @@
-Aiden's World Quest - how to run it
+Aiden's World Quest, Growth Edition - how to run it
 
 ON A PC (works with no internet)
 1. Unzip this folder.
-2. Double-click index.html. It opens in your browser (Chrome or Edge is best).
-3. Tap "Start with music and voice". Press the full-screen button at the top, or press F11 (Esc leaves full screen).
-4. Turn the volume up. Music, narration and sound effects are all included in the folder.
+2. Double-click index.html. It opens in Chrome or Edge.
+3. Choose "Start with music and voice". Use the full-screen button at the top, or press F11.
+4. Turn the volume up. Music, narration and sound effects are all in the folder.
 
 ON AN ANDROID TABLET
-Best: open the game's web link in Chrome, open the Chrome menu (three dots),
-choose "Add to Home screen" or "Install app". It then opens full screen like an app
-and keeps working offline after the first visit (all audio is saved too).
-Tablet sound: check the media volume is up and the tablet is not on silent.
+Open the game's web link in Chrome, open the menu (three dots), and choose "Add to Home screen"
+or "Install app". It then opens full screen and keeps working offline after the first visit.
+Check that the media volume is up and the tablet is not on silent.
 
-WHAT IS NEW
-- Every story is read aloud with the words highlighted. Questions and choices are read too.
-- Original adventure music, with a faster battle tune. Music gets quieter while the voice speaks.
-- Adventure club: Trail Dash (hop over obstacles), Taste Match (food and country memory game),
-  local friends to chat with in each country, and Friendship Arena Pokemon battles.
-- Win a battle to earn a badge and a bonus Pokemon. 12 Pokemon friends to collect.
-- XP and explorer levels. No timers on questions and no key can ever be lost.
+KEEPING PROGRESS
+- The game saves automatically on the device and browser it is played in. When Aiden returns, his keys,
+  Pokemon friends, atlas pages, words, journal and settings are all still there.
+- Each device saves separately. To move to another device, open "Save & backup", download the private
+  backup file or copy the backup code (AWQ3), and restore it on the other device.
+- Clearing browser data or private browsing can erase the local save. Download a backup now and then.
+- Older AWQ1 and AWQ2 codes can still be restored.
+- Up to six local explorers can have their own camp on one device.
 
-SAVING
-Use "Save & continue" in the game to copy an adventure code (AWQ2). Paste it back next time.
-Older AWQ1 codes still work.
+WHAT IS IN THIS EDITION
+- Stories: three read-aloud story cards, a committed answer, and then the evidence sentence that supports it.
+  Wrong answers lead to a review of the clue, not to a punishment. Fast guessing costs trail points
+  and earns no bonus XP, and clicking through the choices earns nothing.
+- Tiers: Scout (details first), Explorer (inference first) and Detective (two questions per story).
+  The game can adjust the tier after recent stories.
+- Choose your path: each country has two routes with a different field mission and a different power.
+- Where in the world next: the atlas case in basecamp links clues from the stories.
+- Trail Dash: stars, gems, leaves and clocks add points. Obstacles cost points and time. A shield and a
+  magnet power are earned through the path choice. Calm mode slows the trail.
+- Word forge: hear a word, build it from tiles or type it, and try optional finger tracing.
+  Hearing a word is always free.
+- Clues to revisit: earlier clues return after a day, three days, a week and later.
+- Growth journal: a feeling, a thank-you and something Aiden cannot do yet.
+- Family field book: off-screen missions for outside and at home. Grown-ups can add their own.
+- For grown-ups: a progress view, tier and text controls, break reminders, local friends and custom missions.
+- Reading supports: larger text, roomier lines, a focus window, a line guide, read-aloud and optional device voice.
+
+HONEST LIMITS
+This is a learning game. It is not a treatment or a test of dyslexia, ADHD or reading level. Its supports are
+inspired by structured-literacy, classroom-attention and spaced-practice guidance. Talk with a teacher or
+specialist about Aiden's own learning plan.
