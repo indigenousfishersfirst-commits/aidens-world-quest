@@ -19,16 +19,17 @@
 <nav class="primary-nav" aria-label="Main navigation">
 <button data-nav="trail" class="nav-item active"><i data-lucide="map"></i><span>Adventure trail</span></button>
 <button data-nav="pets" class="nav-item"><i data-lucide="paw-print"></i><span>My Pokémon</span><span class="nav-count" id="nav-pets">0</span></button>
+<button data-nav="arcade" class="nav-item"><i data-lucide="gamepad-2"></i><span>Adventure club</span></button>
 <button data-nav="passport" class="nav-item"><i data-lucide="book-open"></i><span>My passport</span></button>
 </nav>
 <div class="sidebar-compass"><img src="assets/char-me.webp" alt="A cheerful storybook explorer with a green hat and yellow backpack"><p>A little curiosity.<br>A whole lot of adventure.</p></div>
 <div class="sidebar-bottom"><button class="nav-item" data-action="help"><i data-lucide="circle-help"></i><span>How to play</span></button><button class="nav-item" data-action="save"><i data-lucide="bookmark"></i><span>Save & continue</span></button><button class="profile" data-action="settings"><span class="profile-letter">A</span><span><strong>Aiden</strong><small id="rank-label">Curious explorer</small></span><i data-lucide="settings-2"></i></button></div>
 </aside>
 <div class="workspace">
-<header class="topbar"><div class="breadcrumb"><span>YOUR ADVENTURES</span><span class="slash">/</span><span id="page-crumb">The wonder trail</span></div><div class="top-actions"><span class="stat key-stat" aria-label="Keys earned"><i data-lucide="key-round"></i><strong id="key-count">0</strong><span>/ 18</span></span><span class="stat pet-stat" aria-label="Pokémon friends"><i data-lucide="paw-print"></i><strong id="pet-count">0</strong><span>/ 6</span></span><button class="icon-btn" data-action="fullscreen" id="fs-btn" aria-label="Go full screen" title="Full screen (F)"><i data-lucide="maximize"></i></button><button class="icon-btn" data-action="settings" aria-label="Reading and sound settings"><i data-lucide="sliders-horizontal"></i></button></div></header>
+<header class="topbar"><div class="breadcrumb"><span>YOUR ADVENTURES</span><span class="slash">/</span><span id="page-crumb">The wonder trail</span></div><div class="top-actions"><span class="stat key-stat" aria-label="Keys earned"><i data-lucide="key-round"></i><strong id="key-count">0</strong><span>/ 18</span></span><span class="stat pet-stat" aria-label="Pokémon friends"><i data-lucide="paw-print"></i><strong id="pet-count">0</strong><span>/ 6</span></span><span class="stat xp-stat" aria-label="Experience points"><i data-lucide="sparkles"></i><strong id="xp-count">0</strong><span>XP</span></span><button class="icon-btn" id="sound-btn" data-action="sound" aria-label="Mute game audio" aria-pressed="true"><i data-lucide="volume-2"></i></button><button class="icon-btn" data-action="fullscreen" id="fs-btn" aria-label="Go full screen" title="Full screen (F)"><i data-lucide="maximize"></i></button><button class="icon-btn" data-action="settings" aria-label="Reading and sound settings"><i data-lucide="sliders-horizontal"></i></button></div></header>
 <main id="main" tabindex="-1"></main>
 <footer class="app-footer"><span>Made for curious minds & kind hearts.</span><button data-action="about">About this adventure <i data-lucide="arrow-up-right"></i></button></footer>
 </div></div>
 <div id="overlay" class="overlay" hidden></div><div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="lucide.min.js"></script><script src="data.js"></script><script src="game.js"></script>
+<script src="lucide.min.js"></script><script src="data.js"></script><script src="sound.js"></script><script src="challenges.js"></script><script src="game.js"></script>
 </body></html>
