@@ -4,7 +4,7 @@ const W=window.WORLDS, $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>
 const I=n=>`<i data-lucide="${n}" aria-hidden="true"></i>`;
 const E=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const main=$('#main'),overlay=$('#overlay');
-const state={done:0,buddy:-1,read:'short',comfy:false,sound:true,voice:true,music:true,autoRead:true,musicVolume:.25,voiceVolume:.95,sfxVolume:.6,xp:0,badges:[false,false,false,false,false,false],side:[false,false,false,false,false,false],dashBest:[0,0,0,0,0,0],dashPlayed:[false,false,false,false,false,false],memoryWins:0,calm:false,motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,route:'trail',level:0,hearts:[0,0,0,0,0,0]};
+const state={done:0,buddy:-1,read:'short',comfy:false,sound:true,voice:true,music:true,autoRead:true,musicVolume:.55,voiceVolume:.95,sfxVolume:.8,xp:0,badges:[false,false,false,false,false,false],side:[false,false,false,false,false,false],dashBest:[0,0,0,0,0,0],dashPlayed:[false,false,false,false,false,false],memoryWins:0,calm:false,motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,route:'trail',level:0,hearts:[0,0,0,0,0,0]};
 let modalType='',quest=null,questionOpen=false,feedback='',wrong=-1,won=false,replaying=false,wordOpen=false,lastFocus=null,toastTimer,walk={x:.1,y:.87,tx:.1,ty:.87},pressed=new Set(),lastFrame=0,ctx=null,canvas=null,canvasW=0,canvasH=0,sceneMode='',sceneLevel=0,speechActive=false,audio=null,arcade=null,sessionStarted=false,hiddenVoice=false;
 const SOUND=window.QuestSound,GAMES=window.QuestGames;
 const BONUS=[{id:39,name:'Jigglypuff'},{id:63,name:'Abra'},{id:4,name:'Charmander'},{id:92,name:'Gastly'},{id:79,name:'Slowpoke'},{id:54,name:'Psyduck'}];

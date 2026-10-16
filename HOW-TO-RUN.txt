@@ -2,13 +2,24 @@ Aiden's World Quest - how to run it
 
 ON A PC (works with no internet)
 1. Unzip this folder.
-2. Double-click index.html. It opens in your browser.
-3. Press the full-screen button at the top, or press F11 (Esc leaves full screen).
+2. Double-click index.html. It opens in your browser (Chrome or Edge is best).
+3. Tap "Start with music and voice". Press the full-screen button at the top, or press F11 (Esc leaves full screen).
+4. Turn the volume up. Music, narration and sound effects are all included in the folder.
 
 ON AN ANDROID TABLET
 Best: open the game's web link in Chrome, open the Chrome menu (three dots),
 choose "Add to Home screen" or "Install app". It then opens full screen like an app
-and keeps working offline after the first visit.
+and keeps working offline after the first visit (all audio is saved too).
+Tablet sound: check the media volume is up and the tablet is not on silent.
+
+WHAT IS NEW
+- Every story is read aloud with the words highlighted. Questions and choices are read too.
+- Original adventure music, with a faster battle tune. Music gets quieter while the voice speaks.
+- Adventure club: Trail Dash (hop over obstacles), Taste Match (food and country memory game),
+  local friends to chat with in each country, and Friendship Arena Pokemon battles.
+- Win a battle to earn a badge and a bonus Pokemon. 12 Pokemon friends to collect.
+- XP and explorer levels. No timers on questions and no key can ever be lost.
 
 SAVING
-Use "Save & continue" in the game to copy an adventure code. Paste it back next time.
+Use "Save & continue" in the game to copy an adventure code (AWQ2). Paste it back next time.
+Older AWQ1 codes still work.

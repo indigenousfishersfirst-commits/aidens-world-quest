@@ -1,6 +1,6 @@
 /* Original game score, effects and recorded narration. No voice service is called while playing. */
 window.QuestSound=(()=>{
- const root='assets/audio/';let ready=false,enabled=true,musicOn=true,voiceOn=true,sfxOn=true,mv=.25,vv=.95,sv=.6,track='trail',talking=false,voice=null,voiceId='',paused=false,serial=0,wasMusic=false;
+ const root='assets/audio/';let ready=false,enabled=true,musicOn=true,voiceOn=true,sfxOn=true,mv=.55,vv=.95,sv=.8,track='trail',talking=false,voice=null,voiceId='',paused=false,serial=0,wasMusic=false;
  const music=new Audio();music.loop=true;music.preload='none';let effects=new Set();
  function sync(){music.volume=enabled&&musicOn?(talking?mv*.16:mv):0;if(!enabled||!musicOn||document.hidden)music.pause();else if(ready&&music.src)music.play().catch(()=>{});if(voice)voice.volume=enabled&&voiceOn?vv:0}
  function theme(name='trail'){if(track===name&&music.src){sync();return}track=name;music.src=root+'music-'+name+'.mp3';sync()}
