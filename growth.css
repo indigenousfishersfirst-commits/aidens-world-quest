@@ -62,3 +62,21 @@ body.no-motion .g-break-orbit,body.no-motion .g-big-key{animation:none}@keyframe
 .g-body .eyebrow{font-size:11px}
 
 .growth-modal,.growth-story{animation:none}.g-body>.eyebrow,.g-task-title .eyebrow{margin-top:18px}.g-steps{margin-bottom:4px}
+
+.g-pack-title{margin:22px 0 4px;font-size:1.05rem}.g-word-card.trail{border-color:#d9b96a;background:linear-gradient(#fffdf4,#fbf3dc)}
+
+/* Grandma's tips and celebration */
+.grandma-bubble{position:fixed;bottom:20px;left:24px;z-index:9999;display:flex;gap:12px;align-items:flex-start;width:min(92vw,390px);padding:10px 12px 12px 10px;background:#fffdf4;border:2px solid #d9b96a;border-radius:22px;box-shadow:0 12px 32px #2e3d2a40;animation:gbIn .3s ease}
+.grandma-bubble[hidden]{display:none}
+.grandma-bubble img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #e8d49a;flex:none;background:#f3ead0}
+.gb-text strong{display:block;font-family:var(--display);font-size:15px;color:#3d614a}
+.gb-text p{font-size:14px;line-height:1.5;color:#3a4a3a;margin-top:2px}
+.gb-close{margin-left:auto;width:32px;height:32px;border-radius:50%;font-size:22px;line-height:1;color:#68745f;flex:none;background:#f3f0df}
+@keyframes gbIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fiesta{position:fixed;inset:0;margin:auto;width:100vw;height:100vh;pointer-events:none;z-index:9998}
+.fiesta-shake .modal,.fiesta-shake main{animation:fshake .5s ease}
+@keyframes fshake{20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+.no-motion .grandma-bubble{animation:none}
+@media(max-width:900px){.grandma-bubble{top:8px;bottom:auto;left:50%;transform:translateX(-50%);animation:none}}
+@media(max-width:540px){.grandma-bubble{padding:8px 10px 10px 8px}.grandma-bubble img{width:46px;height:46px}.gb-text p{font-size:13px}}
+.volume-line{grid-template-columns:104px 1fr!important}

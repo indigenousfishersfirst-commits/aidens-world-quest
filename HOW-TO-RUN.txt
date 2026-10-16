@@ -1,10 +1,10 @@
-Aiden's World Quest, Growth Edition - how to run it
+Aiden's World Quest, Sounds and Grandma Edition - how to run it
 
 ON A PC (works with no internet)
 1. Unzip this folder.
 2. Double-click index.html. It opens in Chrome or Edge.
 3. Choose "Start with music and voice". Use the full-screen button at the top, or press F11.
-4. Turn the volume up. Music, narration and sound effects are all in the folder.
+4. Music is now soft on purpose. Turn the volume up a little if needed, or use the sliders in the settings (the sliders icon at the top right). Music, place sounds, narration and effects are all in the folder.
 
 ON AN ANDROID TABLET
 Open the game's web link in Chrome, open the menu (three dots), and choose "Add to Home screen"
@@ -19,6 +19,26 @@ KEEPING PROGRESS
 - Clearing browser data or private browsing can erase the local save. Download a backup now and then.
 - Older AWQ1 and AWQ2 codes can still be restored.
 - Up to six local explorers can have their own camp on one device.
+
+WHAT IS NEW IN THIS VERSION
+- Softer music. The music starts at a low level and gets quieter still whenever someone is speaking.
+  A new setting, Audio mix, has separate sliders for music, place sounds, voice and effects.
+- Place sounds. Each country has its own background (shore, temple garden, Roman square, river and market,
+  mountain wind, harbour) with small sounds that come and go: gulls, birds, frogs, boat and ferry horns,
+  bicycle and tram bells, church and temple bells, scooters, car horns, camel bells, panpipes, a llama,
+  kookaburras and cockatoos. Each story card also brings in a sound that fits it, and a few stories add rain.
+  Turn them off with the switch called Place sounds.
+- Music that follows the play. In Trail Dash and the friendship battles, extra layers of music fade in and the
+  pace rises as time runs low, as a chain grows or when an obstacle is close. It settles after a bump.
+  Calm mode keeps it gentle. Reading, word and matching games stay quiet and have no timers.
+- Bigger wins. Finishing a key, building a word, a personal best and a friendship badge each bring a
+  brighter fanfare and a burst of stars. A new friend or a badge gets the biggest one. Switch off
+  Playful motion to remove the bursts.
+- Grandma. All narration now uses one warm, steady, grandmotherly voice. She also gives short tips,
+  encouragement and cheers, with a caption bubble that can be closed. Turn her tips off with the switch called Grandma's tips.
+- Harder words. The Word Forge now has 36 words. The first 18 are the starters. A second pack of 18
+  longer Trail words opens after six starter words are built on their own, and then grows with the keys.
+  Trail words include extra decoy tiles. A grown-up can open all 36 in the For grown-ups page.
 
 WHAT IS IN THIS EDITION
 - Stories: three read-aloud story cards, a committed answer, and then the evidence sentence that supports it.
@@ -39,6 +59,8 @@ WHAT IS IN THIS EDITION
 - Reading supports: larger text, roomier lines, a focus window, a line guide, read-aloud and optional device voice.
 
 HONEST LIMITS
+All music and place sounds were made for this game with a sound synthesizer. They are not field recordings.
+The narration is a computer-generated voice that was checked by automated tools only.
 This is a learning game. It is not a treatment or a test of dyslexia, ADHD or reading level. Its supports are
 inspired by structured-literacy, classroom-attention and spaced-practice guidance. Talk with a teacher or
 specialist about Aiden's own learning plan.

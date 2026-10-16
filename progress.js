@@ -19,7 +19,8 @@ g.sessions=Array.isArray(g.sessions)?g.sessions.slice(-200):[];g.completedMissio
 return g;}
 function safeState(s){if(!s||typeof s!=='object'||Array.isArray(s))throw Error('This is not a game save.');if(!Number.isInteger(s.done)||s.done<0||s.done>18)throw Error('Invalid key count.');
 const out={done:s.done,buddy:Math.floor(num(s.buddy,-1,11,-1)),read:s.read==='long'?'long':'short',xp:Math.floor(num(s.xp,0,1e7)),route:['trail','area','pets','passport','arcade','camp','parent'].includes(s.route)?s.route:'trail',level:Math.floor(num(s.level,0,5)),memoryWins:Math.floor(num(s.memoryWins,0,1e6))};
-for(const k of ['sound','voice','music','autoRead','motion'])out[k]=s[k]!==false;for(const k of ['comfy','calm'])out[k]=!!s[k];for(const k of ['musicVolume','voiceVolume','sfxVolume'])out[k]=num(s[k],0,1,.65);
+for(const k of ['sound','voice','music','autoRead','motion','ambient','tips'])out[k]=s[k]!==false;for(const k of ['comfy','calm'])out[k]=!!s[k];for(const k of ['musicVolume','voiceVolume','sfxVolume','ambVolume'])out[k]=num(s[k],0,1,k==='musicVolume'?.3:k==='sfxVolume'?.55:k==='ambVolume'?.5:.95);
+out.audioV=Math.floor(num(s.audioV,0,9,0));if(out.audioV<4){out.musicVolume=Math.min(out.musicVolume,.3);out.sfxVolume=Math.min(out.sfxVolume,.55);if(s.ambVolume===undefined)out.ambVolume=.5;out.audioV=4;}
 out.badges=bools(s.badges,6).map((v,i)=>v&&s.done>=(i+1)*3);out.side=bools(s.side,6);out.dashPlayed=bools(s.dashPlayed,6);out.dashBest=Array.from({length:6},(_,i)=>Math.floor(num(s.dashBest?.[i],0,1e5)));out.hearts=Array.from({length:12},(_,i)=>Math.floor(num(s.hearts?.[i],0,1e6)));
 if(out.buddy>=0&&(out.buddy<6?out.buddy>=Math.floor(s.done/3):!out.badges[out.buddy-6]))out.buddy=s.done>=3?0:-1;out.g=safeG(s.g);return out;}
 function validate(x){if(!x||x.v!==3||!Array.isArray(x.profiles)||!x.profiles.length||x.profiles.length>6)throw Error('This is not a supported version 3 backup.');
