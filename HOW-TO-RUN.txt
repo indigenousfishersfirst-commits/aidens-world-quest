@@ -1,0 +1,14 @@
+Aiden's World Quest - how to run it
+
+ON A PC (works with no internet)
+1. Unzip this folder.
+2. Double-click index.html. It opens in your browser.
+3. Press the full-screen button at the top, or press F11 (Esc leaves full screen).
+
+ON AN ANDROID TABLET
+Best: open the game's web link in Chrome, open the Chrome menu (three dots),
+choose "Add to Home screen" or "Install app". It then opens full screen like an app
+and keeps working offline after the first visit.
+
+SAVING
+Use "Save & continue" in the game to copy an adventure code. Paste it back next time.

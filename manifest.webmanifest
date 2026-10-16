@@ -1,0 +1,19 @@
+{
+  "name": "Aiden’s World Quest",
+  "short_name": "World Quest",
+  "description": "A storybook reading adventure around the world. Read, meet friends, discover Pokémon, and earn keys.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f6f7f0",
+  "theme_color": "#f6f7f0",
+  "categories": ["education", "games", "kids"],
+  "icons": [
+    {"src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "assets/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
