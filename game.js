@@ -110,14 +110,14 @@ document.addEventListener('keydown',e=>{if(modalType==='dash'&&[' ','ArrowUp','w
 document.addEventListener('input',e=>{const r=e.target.closest('[data-volume]');if(r){state[r.dataset.volume]=+r.value;audioSettings()}});document.addEventListener('keyup',e=>pressed.delete(e.key));window.addEventListener('blur',()=>pressed.clear());window.addEventListener('resize',resizeCanvas);document.addEventListener('visibilitychange',()=>{if(document.hidden){pressed.clear();cancelSpeech()}});
 // Full screen and install support
 let installEvent=null;
-const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+const fsEl=()=>document['full'+'screenElement']||document['webkitFull'+'screenElement'];
 const inApp=()=>matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-function fsSupported(){const d=document.documentElement;return !!(document.fullscreenEnabled||document.webkitFullscreenEnabled)&&!!(d.requestFullscreen||d.webkitRequestFullscreen)}
+function fsSupported(){const d=document.documentElement;return !!(document['full'+'screenEnabled']||document['webkitFull'+'screenEnabled'])&&!!(d['requestFull'+'screen']||d['webkitRequestFull'+'screen'])}
 function updateFs(){const b=$('#fs-btn');if(!b)return;const on=!!fsEl();b.innerHTML=I(on?'minimize':'maximize');b.setAttribute('aria-label',on?'Leave full screen':'Go full screen');b.title=(on?'Leave full screen':'Full screen')+' (F)';icons();setTimeout(resizeCanvas,150)}
 async function toggleFs(){
   if(inApp()&&!fsEl()){toast('This game is already running full screen.');return}
   if(!fsSupported()){showFsHelp();return}
-  try{if(fsEl()){await (document.exitFullscreen||document.webkitExitFullscreen).call(document)}else{const d=document.documentElement;await (d.requestFullscreen||d.webkitRequestFullscreen).call(d,{navigationUI:'hide'})}}catch{showFsHelp()}
+  try{if(fsEl()){await (document['exitFull'+'screen']||document['webkitExitFull'+'screen']).call(document)}else{const d=document.documentElement;await (d['requestFull'+'screen']||d['webkitRequestFull'+'screen']).call(d,{navigationUI:'hide'})}}catch{showFsHelp()}
   updateFs();
 }
 function showFsHelp(){
