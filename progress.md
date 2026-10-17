@@ -19,3 +19,8 @@ QA inventory: first-pass quiz and evidence; wrong answer review/rapid penalty; r
 - Place sounds default lowered from 0.5 to 0.18; existing saves are capped to 0.18 once (audio version 5). Sliders in Settings still let a grown-up raise it.
 - While narration plays: place sound bed drops to 10 percent, one-off place sounds to 12 percent of their level, music to 18 percent.
 - One-off place sounds are about 20 percent quieter overall and start slightly later on each story card.
+
+## Audio mix update 2
+
+- Place sounds default 0.08 (was 0.18); music default 0.2 (was 0.3). Existing saves are capped once (audio version 6). Sliders still raise them.
+- During narration: place sound bed 5 percent, one-off place sounds 6 percent, music 12 percent.
