@@ -154,3 +154,36 @@ body.easy-read .g-task-title h3{line-height:1.4}
 body.no-motion .adv-play,body.no-motion .btn.adv-ready,body.no-motion .adv-egg.ready .adv-egg-shell,body.no-motion .adv-hub-card.wobble>span,body.no-motion .g-passage .w.spark::after,body.no-motion .adv-egg-note{animation:none}
 
 @media(max-width:480px){.adv-hub-card small{display:none}.adv-hub-card>span{width:40px;height:40px}}
+
+/* Phase 8: clear waiting state for lock buttons, gentle nudge on answers */
+.btn.adv-wait{opacity:.55;filter:saturate(.55);box-shadow:none;cursor:pointer}
+.btn.adv-wait:hover{opacity:.7}
+@keyframes advPulse{0%{box-shadow:0 0 0 0 rgba(239,172,87,.75)}70%{box-shadow:0 0 0 12px rgba(239,172,87,0)}100%{box-shadow:0 0 0 0 rgba(239,172,87,0)}}
+.g-option.adv-pulse{animation:advPulse .9s ease-out 2}
+.g-option.selected{outline:3px solid #2f8f6a;outline-offset:2px}
+.adv-evhint{margin:6px 0 10px}
+@media (prefers-reduced-motion:reduce){.g-option.adv-pulse{animation:none;outline:3px dashed #efac57}}
+mark.adv-match{background:linear-gradient(transparent 55%,rgba(239,172,87,.55) 55%);color:inherit;padding:0 1px;border-radius:2px}
+
+/* Video guard: keep play inside the prize clip */
+.exp-player.adv-guarded{position:relative}
+.adv-yt-shield{position:absolute;z-index:3;background:transparent}
+.adv-yt-shield.top{top:0;left:0;right:0;height:62px}
+.adv-yt-shield.logo{bottom:0;right:48px;width:120px;height:50px}
+.adv-yt-pause{position:absolute;inset:0;z-index:4;display:grid;place-items:center;background:rgba(20,53,47,.86);border-radius:inherit}
+.adv-yt-pause[hidden]{display:none}
+.adv-yt-done{display:grid;justify-items:center;gap:10px;text-align:center;padding:28px 18px}
+.adv-yt-done svg{width:44px;height:44px;color:#efac57}
+.adv-locked-open{opacity:.6}
+
+/* Save my place */
+.adv-chip.save{background:#e8f4ec;border-color:#2f8f6a;color:#1d6440;font-weight:800}
+.adv-chip.save.saved,.adv-savebtn.saved{background:#2f8f6a;color:#fff}
+.adv-resume{display:grid;gap:8px;margin:4px 0 14px;padding:14px 16px;border:2px solid #2f8f6a;border-radius:16px;background:#eef8f1}
+.adv-resume-tag{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em;font-weight:800;color:#1d6440}
+.adv-resume-tag svg{width:16px;height:16px}
+.adv-resume b{font-size:17px;line-height:1.35;color:#173a2c}
+.adv-savebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-4px 0 18px;padding:10px 14px;border-radius:14px;background:#eef8f1;border:1px solid #cfe6d7;color:#1d6440;font-size:14px}
+.adv-savebar>svg{width:18px;height:18px;flex:none}
+.adv-savebar span{flex:1;min-width:180px}
+.adv-savebar .btn{padding:8px 14px}

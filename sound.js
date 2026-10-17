@@ -22,16 +22,23 @@ window.QuestSound=(()=>{
  function ramp(a,t){a._t=Math.max(0,Math.min(1,t));ramps.add(a);if(!rampTimer)rampTimer=setInterval(()=>{let busy=false;ramps.forEach(x=>{const d=x._t-x.volume;if(Math.abs(d)<.002){x.volume=x._t;ramps.delete(x)}else{x.volume=Math.max(0,Math.min(1,x.volume+d*.22));busy=true}});if(!ramps.size){clearInterval(rampTimer);rampTimer=0}},60)}
  const ease=(x,a,b)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
  const duck=()=>talking?1:0;
+ /* Music follows play: full in games and battles, soft while reading or answering, silent for videos and when Aiden steps away. */
+ let lastInput=Date.now(),idle=false,talkEnd=0;
+ function playFactor(){if(idle)return 0;try{if(document.querySelector('.modal iframe,.exp-player iframe,.adv-player iframe'))return 0;if(actionKind)return 1;if(document.querySelector('.modal .exp-lab'))return .6;if(document.querySelector('.modal .g-passage,.modal .g-options,.modal .g-evidence'))return .3;if(document.querySelector('.modal'))return .45;return .4}catch{return .4}}
+ function wake(){lastInput=Date.now();if(idle){idle=false;try{sync()}catch{mix()}}}
+ ['pointerdown','keydown','wheel','touchstart'].forEach(ev=>document.addEventListener(ev,wake,{capture:true,passive:true}));
+ setInterval(()=>{if(talking){talkEnd=Date.now();return}const quiet=Date.now()-Math.max(lastInput,talkEnd);if(!idle&&quiet>45000){idle=true;mix()}},2000);
+ let mixQueued=0;try{new MutationObserver(()=>{if(!mixQueued)mixQueued=requestAnimationFrame(()=>{mixQueued=0;mix()})}).observe(document.documentElement,{childList:true,subtree:true})}catch{}
  function mix(){
   const on=ready&&enabled&&!document.hidden;
-  const dk=talking?.1:1,adk=talking?.015:1,low=actionKind?.45:1;
-  const m=on&&musicOn?mv:0;
+  const dk=talking?.08:1,adk=talking?.012:1,low=actionKind?.45:1;
+  const pf=playFactor();const m=on&&musicOn?mv*pf:0;
   ramp(score,actionKind?0:Math.min(1,m*.9*dk));
   const base=m*dk*(actionKind==='battle'?1.1:1);
   ramp(layers[0],on&&actionKind?Math.min(1,base*(.55+.2*level)):0);
   ramp(layers[1],on&&actionKind?Math.min(1,base*ease(level,.22,.55)*.9):0);
   ramp(layers[2],on&&actionKind?Math.min(1,base*ease(level,.55,.88)):0);
-  const ar=on&&ambOn?av:0;
+  const ar=on&&ambOn&&!idle?av*Math.min(1,pf+.4):0;
   ramp(amb,Math.min(1,ar*adk*low*(actionKind?.55:1)));
   ramp(rainBed,rain?Math.min(1,ar*adk*.9):0);
   const rate=actionKind?.94+.2*level:1;
@@ -73,9 +80,11 @@ window.QuestSound=(()=>{
  function sfx(name,vol=1){if(!ready||!enabled||!sfxOn||document.hidden)return;const a=new Audio(root+'sfx-'+name+'.mp3');a.volume=Math.min(1,sv*vol);effects.add(a);a.onended=a.onerror=()=>effects.delete(a);a.play().catch(()=>effects.delete(a));if(effects.size>10){const old=effects.values().next().value;old.pause();effects.delete(old)}}
  /* Win sounds grow with the achievement. Tier 1 is a collect, 2 a key or word, 3 a level, 4 a badge or pet. */
  function celebrate(tier=2){sfx(tier>=3?'victory':'key',.9);if(tier>=2)setTimeout(()=>sfx('celebrate',tier>=4?1:.8),tier>=3?260:420);if(tier>=4)setTimeout(()=>sfx('victory',.7),1400);if(actionKind){target=Math.min(1,level+.1)}}
- function speak(text,o={}){stop();if(!ready||!enabled||!voiceOn||document.hidden||!('speechSynthesis' in window)){o.error?.();return false}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=o.rate||.9;u.volume=vv;u.onend=()=>{talking=false;mix();o.end?.()};u.onerror=()=>{talking=false;mix();o.error?.()};talking=true;mix();speechSynthesis.speak(u);return true}catch{o.error?.();return false}}
+ let pickedVoice=null;function bestVoice(){if(pickedVoice)return pickedVoice;try{const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));if(!vs.length)return null;const score=v=>{const n=v.name;let s=0;if(/natural|neural|online/i.test(n))s+=50;if(/google/i.test(n))s+=25;if(/aria|jenny|libby|sonia|natasha|clara|samantha|karen|moira|tessa|serena|zira|female/i.test(n))s+=15;if(/en[-_](CA|US)/i.test(v.lang))s+=8;else if(/en[-_](GB|AU)/i.test(v.lang))s+=5;if(/compact|espeak|robot/i.test(n))s-=40;return s};pickedVoice=vs.sort((a,b)=>score(b)-score(a))[0];return pickedVoice}catch{return null}}
+ try{speechSynthesis.onvoiceschanged=()=>{pickedVoice=null}}catch{}
+ function speak(text,o={}){stop();if(!ready||!enabled||!voiceOn||document.hidden||!('speechSynthesis' in window)){o.error?.();return false}try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const bv=bestVoice();if(bv){u.voice=bv;u.lang=bv.lang}u.rate=o.rate||.9;u.pitch=1.02;u.volume=Math.min(1,vv*1.05);u.onend=()=>{talking=false;mix();o.end?.()};u.onerror=()=>{talking=false;mix();o.error?.()};talking=true;mix();speechSynthesis.speak(u);return true}catch{o.error?.();return false}}
  function suspend(){[score,amb,rainBed,...layers].forEach(a=>a.pause());clearTimeout(spotTimer);stop();try{speechSynthesis.cancel()}catch{}effects.forEach(a=>a.pause());effects.clear()}
  document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();else if(ready)sync()});
  return {boot,configure,theme,scene:setScene,cue,spot,action,endAction,intensity,celebrate,narrate,speak,stop,pauseVoice,sfx,suspend,
-  state:()=>({ready,enabled,music:musicOn,voice:voiceOn,sfx:sfxOn,ambient:ambOn,talking,paused,voiceId,scene:loc,rain,action:actionKind,level:+level.toFixed(2),rate:layers[0].playbackRate,musicVolume:score.volume,ambVolume:amb.volume,layerVolumes:layers.map(l=>+l.volume.toFixed(3)),voicePlaying:!!voice&&!voice.paused,musicPlaying:!score.paused,ambPlaying:!amb.paused,layersPlaying:layers.filter(l=>!l.paused).length,lastSpot,track:actionKind||loc})};
+  state:()=>({idle,playFactor:+playFactor().toFixed(2),ready,enabled,music:musicOn,voice:voiceOn,sfx:sfxOn,ambient:ambOn,talking,paused,voiceId,scene:loc,rain,action:actionKind,level:+level.toFixed(2),rate:layers[0].playbackRate,musicVolume:score.volume,ambVolume:amb.volume,layerVolumes:layers.map(l=>+l.volume.toFixed(3)),voicePlaying:!!voice&&!voice.paused,musicPlaying:!score.paused,ambPlaying:!amb.paused,layersPlaying:layers.filter(l=>!l.paused).length,lastSpot,track:actionKind||loc})};
 })();

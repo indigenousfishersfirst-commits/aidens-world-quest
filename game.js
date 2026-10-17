@@ -4,7 +4,7 @@ const W=window.WORLDS, $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>
 const I=n=>`<i data-lucide="${n}" aria-hidden="true"></i>`;
 const E=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const main=$('#main'),overlay=$('#overlay');
-const state={done:0,buddy:-1,read:'short',comfy:false,sound:true,voice:true,music:true,autoRead:true,musicVolume:.2,voiceVolume:.95,sfxVolume:.55,ambVolume:.04,ambient:true,tips:true,audioV:7,xp:0,badges:[false,false,false,false,false,false],side:[false,false,false,false,false,false],dashBest:[0,0,0,0,0,0],dashPlayed:[false,false,false,false,false,false],memoryWins:0,calm:false,motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,route:'trail',level:0,hearts:Array(30).fill(0)};
+const state={done:0,buddy:-1,read:'short',comfy:false,sound:true,voice:true,music:true,autoRead:true,musicVolume:.16,voiceVolume:1,sfxVolume:.45,ambVolume:.03,ambient:true,tips:true,audioV:8,xp:0,badges:[false,false,false,false,false,false],side:[false,false,false,false,false,false],dashBest:[0,0,0,0,0,0],dashPlayed:[false,false,false,false,false,false],memoryWins:0,calm:false,motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,route:'trail',level:0,hearts:Array(30).fill(0)};
 let modalType='',quest=null,questionOpen=false,feedback='',wrong=-1,won=false,replaying=false,wordOpen=false,lastFocus=null,toastTimer,walk={x:.1,y:.87,tx:.1,ty:.87},pressed=new Set(),lastFrame=0,ctx=null,canvas=null,canvasW=0,canvasH=0,sceneMode='',sceneLevel=0,speechActive=false,audio=null,arcade=null,sessionStarted=false,hiddenVoice=false;
 Object.assign(state,window.QuestProgress.initial());
 const SOUND=window.QuestSound,GAMES=window.QuestGames;

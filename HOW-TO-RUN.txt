@@ -83,3 +83,8 @@ The narration is a computer-generated voice that was checked by automated tools 
 This is a learning game. It is not a treatment or a test of dyslexia, ADHD or reading level. Its supports are
 inspired by structured-literacy, classroom-attention and spaced-practice guidance. Talk with a teacher or
 specialist about Aiden's own learning plan.
+
+SAVING YOUR PLACE
+Progress saves by itself on each device and browser. Tap "Save my place" any time, and the next visit opens with "Continue where I left off".
+Saves stay with the link and browser you use, so keep opening the game the same way on each device (same link, same browser).
+To move progress to another device, use "Save & backup" to download a backup file, then load it on the other device.
