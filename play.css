@@ -138,3 +138,5 @@ body.no-motion .pz-bubble,body.no-motion .rt-guide.now,body.no-motion .rt-start,
 .pz-beats{flex-wrap:nowrap}
 .pz-beat{min-width:62px;padding:8px}
 @media (max-width:360px){.pz-beat{min-width:54px}}
+.pz-rock{max-width:100%;min-width:min(240px,100%);box-sizing:border-box;padding:22px 18px 16px}
+.pz-rock-word{flex-wrap:wrap;justify-content:center;font-size:clamp(28px,8vw,52px)}

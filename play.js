@@ -127,7 +127,7 @@ function smash(){const pool=shuffle(smashPool()).slice(0,6);ss={list:pool,i:0,fi
 function drawSmash(){const w=ss.list[ss.i];if(!w)return smashDone();const parts=w.syl.split(/[·\-]/);open('Syllable Smash',`ROCK ${ss.i+1} OF ${ss.list.length}`,`<div class="pz-smash">
  <button class="pz-rock" data-play="ss-hear" aria-label="Hear the word">${I('volume-2')}<span class="pz-rock-word">${parts.map((p,k)=>`<span class="sy sy${k%2} pz-chunk">${E(p)}</span>`).join('')}</span><small>Tap the rock to hear it</small></button>
  <button class="btn btn-plain pz-clap" data-play="ss-clap">${I('hand')} Clap it with me</button>
- <p class="pz-q">How many beats?</p><div class="pz-beats">${[1,2,3,4].map(n=>`<button class="pz-beat" data-play="ss-pick" data-n="${n}">${'<i class="pz-dot"></i>'.repeat(n)}<b>${n}</b></button>`).join('')}</div>
+ <p class="pz-q">How many beats?</p><div class="pz-beats">${(parts.length>4?[2,3,4,5]:[1,2,3,4]).map(n=>`<button class="pz-beat" data-play="ss-pick" data-n="${n}">${'<i class="pz-dot"></i>'.repeat(n)}<b>${n}</b></button>`).join('')}</div>
  <p class="pz-meaning">${E(w.mean)}</p>${back}</div>`,'pz-smash-m');setTimeout(()=>sayWord(w.word),ss.i?250:3600);}
 function clap(){const chunks=$$('.pz-chunk');chunks.forEach((c,k)=>setTimeout(()=>{c.classList.add('beat');sfx('tap',.6);setTimeout(()=>c.classList.remove('beat'),380);},k*520));}
 function pickBeats(n,b){const w=ss.list[ss.i];const need=w.syl.split(/[·\-]/).length;if(n===need){if(!ss.tried)ss.first++;sfx('match',.7);$('.pz-rock')?.classList.add('smashed');burst(.9,originOf($('.pz-rock')));say('ss-right');bump('smash');addXP(ss.tried?5:8,'smash',b);ss.i++;ss.tried=false;setTimeout(drawSmash,1500);}
