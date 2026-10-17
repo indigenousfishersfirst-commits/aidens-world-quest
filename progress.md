@@ -13,3 +13,9 @@ QA inventory: first-pass quiz and evidence; wrong answer review/rapid penalty; r
 - Explorer TV: 40 oEmbed-verified YouTube clips via youtube-nocookie, tap to load, parent toggle, watch-together flags on 6 clips, never cached by the service worker.
 - 144 new narration clips (stories, questions, lab missions, discoveries, watch clues). Service worker cache v6.
 - Verified in headless Chromium: all 18 labs solved through real input with wrong-input messages, core loop, persistence after reload, Nature Dex, TV modal and library, parent toggle, battle with new questions, 375, 800 and 1024 widths. Not verified: playback of videos, listening by ear, an actual Android tablet.
+
+## Audio mix update
+
+- Place sounds default lowered from 0.5 to 0.18; existing saves are capped to 0.18 once (audio version 5). Sliders in Settings still let a grown-up raise it.
+- While narration plays: place sound bed drops to 10 percent, one-off place sounds to 12 percent of their level, music to 18 percent.
+- One-off place sounds are about 20 percent quieter overall and start slightly later on each story card.
