@@ -1,4 +1,4 @@
-Aiden's World Quest, Sounds and Grandma Edition - how to run it
+Aiden's World Quest, Expedition Edition - how to run it
 
 ON A PC (works with no internet)
 1. Unzip this folder.
@@ -20,7 +20,26 @@ KEEPING PROGRESS
 - Older AWQ1 and AWQ2 codes can still be restored.
 - Up to six local explorers can have their own camp on one device.
 
-WHAT IS NEW IN THIS VERSION
+WHAT IS NEW IN THIS VERSION: THE EXPEDITION
+- Every scene now flows the same way: Explore (three short story cards), Experiment (a hands-on Field Lab),
+  Decode (one plain question) and Discover (a Nature Dex card, a golden key and a "Next scene" button).
+  There is no path to choose any more, so the game keeps moving on its own.
+- 18 Field Labs, one per scene, built around science and the outdoors: tides and wet lines, salmon and forests,
+  habitats, river currents, rice and food engineering, wind, camp shade, arches, photosynthesis, mapping a river,
+  soaking lentils, placing weights, patterns, lenses, plant roots, coastal clean-up sorting and more. Each lab is a
+  simplified game model and says so. Wrong tries give a friendly nudge, never a penalty.
+- Questions are shorter and say what they are looking for: WHERE, WHO, WHAT, WHICH or HOW, with a one-line hint
+  and a "Look back at the story" button. All 18 stories and 36 questions were rewritten as small mysteries with
+  new narration (144 new voice clips).
+- Nature Dex: every discovery is collected, with explorer ranks and field gear unlocked at 1, 3, 6, 9, 12 and
+  18 discoveries. Gear powers the Trail Dash.
+- Explorer TV: 40 short YouTube clips about real places, people, animals, things and food. A clip loads only
+  when Aiden taps "Load video". It needs internet. The offline PC copy works fully without videos.
+  Clips from Indigenous and cultural sources are marked "Watch together" for a grown-up to preview.
+  A grown-up can switch Explorer TV off in For grown-ups, where a library preview is also available.
+  Nothing from the game is sent to YouTube, but loading the player shares connection data with that service.
+
+EARLIER ADDITIONS (SOUNDS AND GRANDMA EDITION)
 - Softer music. The music starts at a low level and gets quieter still whenever someone is speaking.
   A new setting, Audio mix, has separate sliders for music, place sounds, voice and effects.
 - Place sounds. Each country has its own background (shore, temple garden, Roman square, river and market,
@@ -46,10 +65,10 @@ WHAT IS IN THIS EDITION
   and earns no bonus XP, and clicking through the choices earns nothing.
 - Tiers: Scout (details first), Explorer (inference first) and Detective (two questions per story).
   The game can adjust the tier after recent stories.
-- Choose your path: each country has two routes with a different field mission and a different power.
+- Field Labs and the Nature Dex replace the old path choice (see the Expedition notes above).
 - Where in the world next: the atlas case in basecamp links clues from the stories.
 - Trail Dash: stars, gems, leaves and clocks add points. Obstacles cost points and time. A shield and a
-  magnet power are earned through the path choice. Calm mode slows the trail.
+  magnet power are earned from Field Lab discoveries. Calm mode slows the trail.
 - Word forge: hear a word, build it from tiles or type it, and try optional finger tracing.
   Hearing a word is always free.
 - Clues to revisit: earlier clues return after a day, three days, a week and later.
