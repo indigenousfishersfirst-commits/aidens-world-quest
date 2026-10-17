@@ -17,7 +17,7 @@ const keyOf=w=>w.toLowerCase().replace(/[^a-zà-ÿ'’-]/g,'').replace(/[’']s$
 
 /* ---------- Counters ---------- */
 function counts(){const x=g();const spotted=Object.keys(x.spotted||{}).length,patience=Object.keys(x.patience||{}).length,gratitude=Object.keys(x.gratitude||{}).length,sparks=Object.keys(x.sparks||{}).length;
- const tickets=Math.max(0,patience+gratitude+spotted-(x.tvBought||[]).length);
+ const tickets=Math.max(0,patience+gratitude+spotted+(x.play?.tickets||0)-(x.tvBought||[]).length);
  const warmth=(st().done||0)+spotted*2+patience+gratitude+Math.floor(sparks/3);
  const hatched=x.hatched||[];const ready=D.eggs.map((e,i)=>!hatched.includes(i)&&warmth>=e.need).filter(Boolean).length;
  return {spotted,patience,gratitude,sparks,tickets,warmth,hatched,ready};}

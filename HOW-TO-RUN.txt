@@ -88,3 +88,18 @@ SAVING YOUR PLACE
 Progress saves by itself on each device and browser. Tap "Save my place" any time, and the next visit opens with "Continue where I left off".
 Saves stay with the link and browser you use, so keep opening the game the same way on each device (same link, same browser).
 To move progress to another device, use "Save & backup" to download a backup file, then load it on the other device.
+
+PLAY ZONE, MISSIONS AND THE ADVENTURE PASS
+- Adventure Pass: every quest, right answer, Word Spark, mission and mini-game adds Pass XP. Each level unlocks a Pokémon sticker, and every third level adds a TV ticket for science bonus clips.
+- Today's missions: three small missions each day, in any order. Finishing all three opens a treasure chest. Days played are shown as dots, and a missed day never takes anything away.
+- Focus combo: answers that are right on the first try build a combo and earn bonus XP. Looking back at the story is always free.
+- Play Zone (about a minute each, no timer, no lost points):
+  Syllable Smash: hear a word, clap the beats, pick how many beats.
+  Mirror Monsters: find b, d, p and q, with a picture trick for each letter.
+  Rune Trace: trace letters with a finger along a glowing path (no handwriting needed).
+  Pokémon Moves: a 30-second movement break. The game offers one after every two quests.
+- Syllable colors and Focus mode: buttons on each story card. Syllable colors splits longer words into blue and red beats. Focus mode tucks away extra panels.
+
+CREDITS
+- canvas-confetti by Kiril Vatev (ISC license), vendor/CONFETTI-LICENSE.txt
+- Hypher by Bram Stein with en-us TeX hyphenation patterns (BSD license), vendor/HYPHER-LICENSE.txt
