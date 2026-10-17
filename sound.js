@@ -1,9 +1,9 @@
 /* Original soundscapes, adaptive score and recorded narration. Everything plays from files inside this folder; no sound service is called while playing. */
 window.QuestSound=(()=>{
  const root='assets/audio/';
- let ready=false,enabled=true,musicOn=true,voiceOn=true,sfxOn=true,ambOn=true,mv=.2,vv=.95,sv=.55,av=.08,talking=false,voice=null,voiceId='',paused=false,serial=0;
+ let ready=false,enabled=true,musicOn=true,voiceOn=true,sfxOn=true,ambOn=true,mv=.2,vv=.95,sv=.55,av=.04,talking=false,voice=null,voiceId='',paused=false,serial=0;
  let loc='bc',rain=false,actionKind='',target=0,level=0,tension=0,spotTimer=0,mixTimer=0,lastSpot='',lastSpotAt=0;
- const mk=(loop=true)=>{const a=new Audio();a.loop=loop;a.preload='none';return a};
+ const mk=(loop=true)=>{const a=new Audio();a.loop=loop;a.preload='none';a.volume=0;return a};
  const score=mk(),amb=mk(),rainBed=mk(),layers=[mk(),mk(),mk()];
  let effects=new Set();
  const SPOTS={
@@ -18,20 +18,22 @@ window.QuestSound=(()=>{
   '4-0':['panpipe','llama','eagle'],'4-1':['llama','chirp','panpipe'],'4-2':['chirp','eagle','llama'],
   '5-0':['ferry-horn','gull','cockatoo'],'5-1':['kookaburra','chirp','cockatoo'],'5-2':['gull','kookaburra','ferry-horn']};
  const RAIN={'0-2':1,'1-1':1,'4-2':1};
+ const ramps=new Set();let rampTimer=0;
+ function ramp(a,t){a._t=Math.max(0,Math.min(1,t));ramps.add(a);if(!rampTimer)rampTimer=setInterval(()=>{let busy=false;ramps.forEach(x=>{const d=x._t-x.volume;if(Math.abs(d)<.002){x.volume=x._t;ramps.delete(x)}else{x.volume=Math.max(0,Math.min(1,x.volume+d*.22));busy=true}});if(!ramps.size){clearInterval(rampTimer);rampTimer=0}},60)}
  const ease=(x,a,b)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
  const duck=()=>talking?1:0;
  function mix(){
   const on=ready&&enabled&&!document.hidden;
-  const dk=talking?.12:1,adk=talking?.05:1,low=actionKind?.45:1;
+  const dk=talking?.1:1,adk=talking?.015:1,low=actionKind?.45:1;
   const m=on&&musicOn?mv:0;
-  score.volume=actionKind?0:Math.min(1,m*.9*dk);
+  ramp(score,actionKind?0:Math.min(1,m*.9*dk));
   const base=m*dk*(actionKind==='battle'?1.1:1);
-  layers[0].volume=on&&actionKind?Math.min(1,base*(.55+.2*level)):0;
-  layers[1].volume=on&&actionKind?Math.min(1,base*ease(level,.22,.55)*.9):0;
-  layers[2].volume=on&&actionKind?Math.min(1,base*ease(level,.55,.88)):0;
+  ramp(layers[0],on&&actionKind?Math.min(1,base*(.55+.2*level)):0);
+  ramp(layers[1],on&&actionKind?Math.min(1,base*ease(level,.22,.55)*.9):0);
+  ramp(layers[2],on&&actionKind?Math.min(1,base*ease(level,.55,.88)):0);
   const ar=on&&ambOn?av:0;
-  amb.volume=Math.min(1,ar*adk*low*(actionKind?.55:1));
-  rainBed.volume=rain?Math.min(1,ar*adk*.9):0;
+  ramp(amb,Math.min(1,ar*adk*low*(actionKind?.55:1)));
+  ramp(rainBed,rain?Math.min(1,ar*adk*.9):0);
   const rate=actionKind?.94+.2*level:1;
   layers.forEach(l=>{if(Math.abs(l.playbackRate-rate)>.004)l.playbackRate=rate});
   if(voice)voice.volume=enabled&&voiceOn?vv:0;
@@ -51,7 +53,7 @@ window.QuestSound=(()=>{
  function tick(){level+=(target-level)*.16;if(Math.abs(target-level)<.003)level=target;tension=level;mix();align()}
  function setScene(id,opts={}){if(!SPOTS[id])id='bc';const changed=id!==loc||rain!==!!opts.rain;loc=id;rain=!!opts.rain;if(changed&&ready)sync()}
  function spot(name,vol=1){
-  if(!ready||!enabled||!ambOn||document.hidden||!name)return;const a=new Audio(root+'spot-'+name+'.mp3');a.volume=Math.min(1,av*vol*(talking?.06:1)*1.1);effects.add(a);a.onended=a.onerror=()=>effects.delete(a);a.play().catch(()=>effects.delete(a));lastSpot=name;lastSpotAt=Date.now();
+  if(!ready||!enabled||!ambOn||document.hidden||!name)return;const a=new Audio(root+'spot-'+name+'.mp3');a.volume=Math.min(1,av*vol*(talking?.02:1)*1.1);effects.add(a);a.onended=a.onerror=()=>effects.delete(a);a.play().catch(()=>effects.delete(a));lastSpot=name;lastSpotAt=Date.now();
  }
  function scheduleSpot(){clearTimeout(spotTimer);if(!ready||!enabled||!ambOn||document.hidden)return;spotTimer=setTimeout(()=>{const l=SPOTS[loc]||SPOTS.bc;let n=l[Math.floor(Math.random()*l.length)];if(n===lastSpot)n=l[(l.indexOf(n)+1)%l.length];if(!talking&&!actionKind)spot(n,.9);else if(!talking&&actionKind&&Math.random()<.25)spot(n,.5);scheduleSpot()},9000+Math.random()*13000)}
  function cue(lv,n,page){const list=CUES[lv+'-'+n];if(!list)return;setScene(['bc','kyoto','rome','cairo','cusco','sydney'][lv]||'bc',{rain:!!RAIN[lv+'-'+n]&&page>=1});setTimeout(()=>spot(list[Math.max(0,Math.min(2,page))],1),900)}

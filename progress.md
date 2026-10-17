@@ -24,3 +24,8 @@ QA inventory: first-pass quiz and evidence; wrong answer review/rapid penalty; r
 
 - Place sounds default 0.08 (was 0.18); music default 0.2 (was 0.3). Existing saves are capped once (audio version 6). Sliders still raise them.
 - During narration: place sound bed 5 percent, one-off place sounds 6 percent, music 12 percent.
+
+## Audio mix update 3
+
+- Place sounds default 0.04 (half of before). While narration plays the bed is 1.5 percent and one-off place sounds 2 percent of their level; music 10 percent.
+- Volume changes now fade smoothly instead of jumping. Sliders use 0.01 steps for fine control. Existing saves are capped once (audio version 7).
