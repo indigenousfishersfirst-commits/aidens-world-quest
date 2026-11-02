@@ -18,6 +18,7 @@ Work happens on branch `phase10a`. main and the live GitHub Pages game are untou
 | Wiring notes and remaining blockers | phase10/README.md | Done |
 | Four 10a mini-games, badge case, globe map, art, narration, sw.js v14 | play.js, game.js, assets, sw.js | Not started (needs a Computer session) |
 | Build log | progress.md, Phase 10 section | Done |
+| Four 10a decisions (stop order, Eevee, home stop, Lily) | PHASE10-PLAN.md section 10 | Decided November 2, 2026 |
 
 Read in this order: PHASE10-PLAN.md, PHASE10-SUPERCHARGE.md, phase10/README.md, then progress.md.
 
@@ -126,12 +127,46 @@ QA checklist per sub-phase: start screen; one full new stop (Explore, Experiment
 
 ## 9. Prompt for the next Computer session
 
-Continue Aiden's World Quest with Phase 10 (Badge Quest). Source: GitHub repo indigenousfishersfirst-commits/aidens-world-quest. Work on branch phase10a (do not touch main until the QA checklist passes, then open a pull request). Perplexity app asset 5ec62beb-56fc-4993-805e-31e9a1992e5c, published site a38cf76e-04ef-467b-b787-dbc3a36f13c2. Read PHASE10-PLAN.md, PHASE10-SUPERCHARGE.md, phase10/README.md and progress.md first. Already on the branch: phase10/skills.js (hidden skills tracker), phase10/stops-10a.js (Honolulu and Paris drafts and 10a word banks), progress.js schema v4 (run node phase10/test-progress.js and node phase10/test.js). Finish sub-phase 10a: wire skills.js, merge WORLDS_10A behind a flag, set window.POKE_TOTAL, replace the hard-coded 18 and 30 with QuestProgress.limits(), build Sound Surf, Klefki's Key Forge, Lava Letters and Magikarp's Climb, the badge case and globe map, add art and sprites, generate and normalise Grandma narration to -16 LUFS, bump sw.js to v14, run the QA checklist in headless Chromium, commit to phase10a, and ask me before merging to main or republishing the Perplexity site. Keep it fun-first with hidden learning, dyslexia, dysgraphia and ADHD supports, quiet place sounds, music only in active play, and saved progress. Never include NIFI, NIFI-Tech or Cantek. Tell me plainly what was and was not tested.
+Continue Aiden's World Quest with Phase 10 (Badge Quest). Source: GitHub repo indigenousfishersfirst-commits/aidens-world-quest. Work on branch phase10a (do not touch main until the QA checklist passes, then open a pull request). Perplexity app asset 5ec62beb-56fc-4993-805e-31e9a1992e5c, published site a38cf76e-04ef-467b-b787-dbc3a36f13c2. Read PHASE10-PLAN.md, PHASE10-SUPERCHARGE.md, phase10/README.md and progress.md first. Already on the branch: phase10/skills.js (hidden skills tracker), phase10/stops-10a.js (Honolulu and Paris drafts and 10a word banks), progress.js schema v4 (run node phase10/test-progress.js and node phase10/test.js). Finish sub-phase 10a: wire skills.js, merge WORLDS_10A behind a flag, set window.POKE_TOTAL, replace the hard-coded 18 and 30 with QuestProgress.limits(), build Sound Surf, Klefki's Key Forge, Lava Letters and Magikarp's Climb, the badge case and globe map, add art and sprites, generate and normalise Grandma narration to -16 LUFS, bump sw.js to v14, run the QA checklist in headless Chromium, commit to phase10a, and ask me before merging to main or republishing the Perplexity site. Keep it fun-first with hidden learning, dyslexia, dysgraphia and ADHD supports, quiet place sounds, music only in active play, and saved progress. Section 10 of PHASE10-PLAN.md holds four decisions already made (Honolulu and Paris first with a Sapporo teaser postcard; Eevee choice visible early and evolution at the Grass Badge; home stop in English only with no Nuu-chah-nulth content until approved; Lily co-op deferred to 10c): build to them and do not re-ask. Never include NIFI, NIFI-Tech or Cantek. Tell me plainly what was and was not tested.
 
-## 10. Open questions for Andy
+## 10. Decisions for 10a (made by Andy, November 2, 2026)
 
-- Order of new stops: Honolulu and Paris first (strongest Pokemon links), or Sapporo because snow and salmon connect back to home?
-- Eevee's evolution choice: allow it early as a motivator, or hold it for the Grass Badge?
-- Home stop expansion: who in the community should be asked before any Nuu-chah-nulth language or place names are added?
-- Harvest Heroes: fold Lily in as a recurring co-op friend in the new stops?
-- Plus the four narration, font, voice-feature and villain-trio decisions in PHASE10-SUPERCHARGE.md section 8.
+These four questions are settled. The Computer session should build to them and not re-ask.
+
+| Decision | Call | Phase |
+|---|---|---|
+| Stop order | Honolulu and Paris first; Sapporo opens the 10c batch | 10a / 10c |
+| Eevee's evolution | Choice visible from day one; evolution happens at the Grass Badge | 10a |
+| Home stop (Barkley Sound) | Build now in English only; Nuu-chah-nulth language layer only after community approval | 10a core, language later |
+| Lily co-op | Yes, inside World Quest, in Sound Surf and Bagel Stack | 10c |
+
+### 10.1 Stop order: Honolulu and Paris, then Sapporo
+
+- Build Honolulu and Paris in 10a as drafted in phase10/stops-10a.js. They carry the next two phonics rungs after the home stop (magic e, vowel teams), and their Pokemon links (Alola and aloha, Prism Tower and the Eiffel Tower) are ones Aiden can spot himself.
+- Sapporo is the first stop of 10c and anchors the February Snow Festival event.
+- Plant it early: the Paris episode ends with a short teaser postcard from Yuki in Sapporo (snow, a salmon river like home). One narration clip, one picture.
+
+### 10.2 Eevee: choose early, evolve at the Grass Badge
+
+- From the first session, the badge case shows three silhouettes (Vaporeon, Jolteon, Flareon). Tapping one plays a short Grandma line about that friend. Aiden can mark a favourite at any time; the pick is stored (`g.eeveeChoice`, 0 to 2, or -1) but not applied.
+- Earning the Grass Badge (skill `cvc` reports `mastered`) triggers the evolution cinematic using the stored choice. If no choice is stored, the cinematic pauses on the three silhouettes and asks.
+- The choice can be changed until the badge is earned; after that it is final, like the real games.
+- Guardrail: if the hidden tracker shows the Grass Badge taking more than about two weeks of normal play, lower the mastery threshold for `cvc` (for example 15 tries over 3 days at 75 percent) rather than moving the evolution earlier.
+
+### 10.3 Home stop: English now, language layer only with permission
+
+- Build the Barkley Sound / Alberni Inlet page in 10a with English text only: salmon run and herring spawn science, local scenery, Magikarp's Climb, spotters Lapras and Wailmer.
+- No Nuu-chah-nulth words, place names, greetings or audio go into any build until Andy has spoken directly with the community and has a clear yes. Barkley Sound and the Alberni Inlet are Tseshaht (c̓išaaʔatḥ) territory; the Tseshaht language program is the first point of contact, with the Nuu-chah-nulth Tribal Council for anything spanning more than one nation. Andy makes that contact himself, not through a document.
+- Questions to settle in that conversation: which words or names (if any) may be used; who reviews spelling and pronunciation; whether audio should be recorded by a community speaker rather than synthesised; how credit should appear in the game and in the grown-ups page.
+- When approved, the language layer lands as its own commit behind a flag so it can be reviewed and, if asked, removed cleanly.
+
+### 10.4 Lily: co-op inside World Quest in 10c
+
+- Harvest Heroes stays as is. Two-player mode comes into World Quest in 10c through Sound Surf (two surfers, two lanes) and Bagel Stack (alternating bagels), reusing the Harvest Heroes control scheme (Aiden W A S D on the left, Lily arrows on the right; split touch zones on tablets).
+- Lily keeps her own camp profile on the device (the six-profile limit already allows this). The skills tracker records only the active profile's taps, so co-op rounds do not change Aiden's mastery or badges.
+- Lily's look carries over from Harvest Heroes unless her family asks for a change.
+- Not in 10a: adding co-op before the badge system and schema v4 are browser-tested would double the testing surface of the first four games.
+
+### 10.5 Still open (for 10b and later)
+
+The four narration, font, voice-feature and villain-trio decisions in PHASE10-SUPERCHARGE.md section 8 remain open and are not needed to finish 10a.
