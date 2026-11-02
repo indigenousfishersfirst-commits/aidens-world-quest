@@ -1,6 +1,6 @@
 # Phase 10a scaffold on branch phase10a
 
-Status: groundwork. Nothing in this folder is loaded by index.html yet, so the live game is unchanged.
+Status: Phase 10a built on branch phase10a and wired into index.html (Badge Quest). main and the live game are unchanged until the pull request is merged.
 progress.js at the repository root IS replaced on this branch (schema v4) and behaves identically to v3
 with today's six stops. All files were unit-tested in Node, not in a browser.
 
@@ -49,4 +49,33 @@ constants. Replace with `QuestProgress.limits()`.
 9. Bump sw.js cache to v14, add new files to the precache list, run the QA checklist in PHASE10-PLAN.md section 8.
 10. Open a pull request phase10a -> main; merge only after QA; republish the Perplexity site only when Andy approves.
 
-Never include NIFI, NIFI-Tech or Cantek.
+
+## Phase 10a build (Badge Quest)
+
+Approach: a self-contained module instead of merging WORLDS_10A into WORLDS. game.js, growth.js, content.js and
+the expedition and adventure code assume six worlds and a fixed Pokemon index scheme (0-5 world, 6-11 badge,
+12-23 spotters, 24-29 eggs), so merging would touch most of the engine. Badge Quest runs as a full-screen layer
+launched from a panel on the wonder trail, keeps its own progress in g.bq10, and adds Pokemon 30-39 through
+QuestProgress.unlockPoke. state.done is unchanged; the top bar shows trail keys plus Badge Quest keys.
+
+- `bq-data.js` - Barkley Sound stop (English only), roster 30-39 (Popplio, Fennekin, Feebas, Wingull, Pyukumuku,
+  Rowlet, Klefki, Fletchling, Wailmer, Rufflet), evolution forms, Eevee paths, 12-slot badge case, short-vowel
+  rounds, labs, Yuki teaser, narration clip text. Sets window.POKE_TOTAL = 40. Loaded before progress.js.
+- `badge.js` / `badge.css` - map strip, 3 s skippable hop, stop scenes with hidden spotters, read-along stories
+  with syllable colours, tap-to-hear questions, Field Labs (lava vents, triangle tower), Sound Surf, Salmon Leap,
+  Klefki's Key Forge, Lava Letters (trace with start dots, moving guide dot, wide tolerance, left-hand mode),
+  Magikarp's Climb, badge drop, partner join with shiny roll, evolution cinematic, Eevee choice, badge case,
+  Badge Quest friends. Every game item calls QuestSkills.record and reads QuestSkills.support.
+- Magikarp, Gyarados, Lapras and Vaporeon were already in the original 30, so Feebas (Barkley partner),
+  Wailmer and Rufflet fill those roster slots. Gyarados and the Eevee forms are shown, not counted.
+- Assets: bg/char/food for honolulu, paris, barkley; PokeAPI official artwork (normal and shiny) in
+  assets/pokemon and assets/pokemon/shiny; 38 narration clips in assets/audio/bq (Grandma voice, -16 LUFS).
+
+Tested in headless Chromium on a local server (not on a tablet):
+- Full playthrough of Barkley Sound, Honolulu and Paris through real clicks: 9 stories, 9 questions with one wrong answer each (clue shown, no cost, Grit message), all 7 hidden spotters, lava vents (wrong order gives a steam hint), triangle tower (a square slides off), Salmon Leap, Sound Surf and Key Forge bosses with wrong taps, Water and Steel badges, stamp, three partners, Yuki postcard.
+- Lava Letters: one letter traced with real mouse strokes, a scribble that does not count, left-hand mode, then the rest through a test hook. Magikarp's Climb: wrong tap, then 100 jumps reached and the Gyarados cinematic. Popplio to Brionne evolution after the magic e skill reached level 3. Eevee path choice saved.
+- Top bar shows keys out of 27 and Pokemon out of 40; pets page gets a Badge Quest friends section.
+- Save, reload (state identical), AWQ4 export and import, tampered bq10 data sanitised. AWQ3 import covered by phase10/test-progress.js.
+- Service worker v14 caches 800 files; offline reload opens Badge Quest with art and narration.
+- 375, 800 and 1280 px layouts; original trail, Explorer TV vault, Play Zone, every nav page and the Save and backup screen open with no page errors.
+Not tested: a real Android tablet or PC browser, touch tracing by finger, narration and music by ear, audio ducking, Eevee evolution end to end (needs 3 real days of cvc practice), the shiny roll odds.

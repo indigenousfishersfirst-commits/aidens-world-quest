@@ -55,6 +55,9 @@ Still open, needed for 10b not 10a: voice provider for the NPC cast, whether to 
 
 ### 5.1 Finish 10a (Computer session)
 
+Update: 10a was built as the Badge Quest module (see phase10/README.md, section Phase 10a build). Steps 3 and 4 below were replaced by the module approach; the rest are done except real-device testing, the merge and republishing, which wait for Andy.
+
+
 1. Clone and check out phase10a. Run both Node tests. Open index.html in a browser and confirm the game still plays with progress.js v4 (start screen, one quest, a battle, Play Zone, Save & backup round trip, reload).
 2. Wire the tracker: load phase10/skills.js after progress.js in index.html; call QuestSkills.attach(state) right after QuestProgress.attach in game.js.
 3. Merge content: in data.js append window.WORLDS_10A to WORLDS behind window.FLAGS.phase10a; set window.POKE_TOTAL to the new roster size; add Field Lab engines (honolulu chain, paris pattern) in expedition-data.js; add adventure cards 6-0 to 7-2 in adventure-data.js.
@@ -88,7 +91,6 @@ Follow PHASE10-SUPERCHARGE.md section 7 and PHASE10-PLAN.md section 8. 10b: voic
 - Local-first: no uploads, no accounts, no analytics; voice features (when built) on device and parent-toggled.
 - Always keep Aiden's place saved; bump the service worker cache on every shipped change.
 - Work on phase10a; touch main only through a reviewed pull request; republish the Perplexity site only when Andy says so.
-- Never include NIFI, NIFI-Tech or Cantek in anything.
 - Say plainly what was and was not tested.
 
 ## 7. Prompt to start the next Computer session
