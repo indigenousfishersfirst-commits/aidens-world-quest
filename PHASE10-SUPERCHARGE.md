@@ -1,6 +1,6 @@
 # Aiden's World Quest: Supercharge Brief (Phase 10b to 10d)
 
-Prepared November 2, 2026. Extends PHASE10-PLAN.md and the phase10a branch. Four pillars: richer storylines, a real narration cast, deeper stealth learning, and best-practice reading and writing supports for dyslexia and dysgraphia. Everything keeps the standing rules: fun first, wrong answers never cost points, quiet place sounds, music only in action, local-first saves, no uploads. Never include NIFI, NIFI-Tech or Cantek.
+Prepared November 2, 2026. Extends PHASE10-PLAN.md and the phase10a branch. Four pillars: richer storylines, a real narration cast, deeper stealth learning, and best-practice reading and writing supports for dyslexia and dysgraphia. Everything keeps the standing rules: fun first, wrong answers never cost points, quiet place sounds, music only in action, local-first saves, no uploads.
 
 Where this fits:
 
