@@ -29,3 +29,10 @@ QA inventory: first-pass quiz and evidence; wrong answer review/rapid penalty; r
 
 - Place sounds default 0.04 (half of before). While narration plays the bed is 1.5 percent and one-off place sounds 2 percent of their level; music 10 percent.
 - Volume changes now fade smoothly instead of jumping. Sliders use 0.01 steps for fine control. Existing saves are capped once (audio version 7).
+
+
+## Phase 10 (branch phase10a, November 2, 2026): Badge Quest groundwork
+
+- Plans: PHASE10-PLAN.md (master plan, status map, Computer-session prompt) and PHASE10-SUPERCHARGE.md (season story arc, narration cast with per-word timing, BDA-based typography defaults, dysgraphia trace engine and voice alternatives, stealth-learning and juice upgrades, 10a to 10d build order).
+- Code: phase10/skills.js (hidden per-skill tracker, Grit, Try-It, review schedule; Node-tested), phase10/stops-10a.js (Honolulu and Paris drafts, 10a mini-game word banks), progress.js schema v4 (limits derived from WORLDS.length and window.POKE_TOTAL; AWQ4 codes; AWQ3, JSON and legacy imports kept; unlocked10 and skills10 fields; Node-tested with phase10/test-progress.js).
+- Not yet: wiring into index.html, the four 10a mini-games, badge case, globe map, art, narration clips, sw.js v14, any browser or device testing. main and the live game are unchanged.
