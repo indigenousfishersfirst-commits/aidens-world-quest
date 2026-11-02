@@ -29,3 +29,23 @@ QA inventory: first-pass quiz and evidence; wrong answer review/rapid penalty; r
 
 - Place sounds default 0.04 (half of before). While narration plays the bed is 1.5 percent and one-off place sounds 2 percent of their level; music 10 percent.
 - Volume changes now fade smoothly instead of jumping. Sliders use 0.01 steps for fine control. Existing saves are capped once (audio version 7).
+
+
+## Phase 10 (branch phase10a, November 2, 2026): Badge Quest groundwork
+
+- Plans: PHASE10-PLAN.md (master plan, status map, Computer-session prompt) and PHASE10-SUPERCHARGE.md (season story arc, narration cast with per-word timing, BDA-based typography defaults, dysgraphia trace engine and voice alternatives, stealth-learning and juice upgrades, 10a to 10d build order).
+- Code: phase10/skills.js (hidden per-skill tracker, Grit, Try-It, review schedule; Node-tested), phase10/stops-10a.js (Honolulu and Paris drafts, 10a mini-game word banks), progress.js schema v4 (limits derived from WORLDS.length and window.POKE_TOTAL; AWQ4 codes; AWQ3, JSON and legacy imports kept; unlocked10 and skills10 fields; Node-tested with phase10/test-progress.js).
+- Not yet: wiring into index.html, the four 10a mini-games, badge case, globe map, art, narration clips, sw.js v14, any browser or device testing. main and the live game are unchanged.
+
+## Phase 10a (branch phase10a, November 2, 2026): Badge Quest built
+
+- New: phase10/bq-data.js, phase10/badge.js, phase10/badge.css; skills.js and stops-10a.js now loaded. Barkley Sound (English only), Honolulu and Paris, 9 keys, Water and Steel badges, 10 new Pokemon (30-39), four mini-games plus Salmon Leap, two Field Labs, evolution cinematic, Eevee path, 12-slot badge case, Yuki postcard.
+- Top bar now shows keys out of 27 and Pokemon out of 40. Backup wording says AWQ4 (AWQ3 still imports). Service worker cache v14.
+Tested in headless Chromium on a local server (not on a tablet):
+- Full playthrough of Barkley Sound, Honolulu and Paris through real clicks: 9 stories, 9 questions with one wrong answer each (clue shown, no cost, Grit message), all 7 hidden spotters, lava vents (wrong order gives a steam hint), triangle tower (a square slides off), Salmon Leap, Sound Surf and Key Forge bosses with wrong taps, Water and Steel badges, stamp, three partners, Yuki postcard.
+- Lava Letters: one letter traced with real mouse strokes, a scribble that does not count, left-hand mode, then the rest through a test hook. Magikarp's Climb: wrong tap, then 100 jumps reached and the Gyarados cinematic. Popplio to Brionne evolution after the magic e skill reached level 3. Eevee path choice saved.
+- Top bar shows keys out of 27 and Pokemon out of 40; pets page gets a Badge Quest friends section.
+- Save, reload (state identical), AWQ4 export and import, tampered bq10 data sanitised. AWQ3 import covered by phase10/test-progress.js.
+- Service worker v14 caches 800 files; offline reload opens Badge Quest with art and narration.
+- 375, 800 and 1280 px layouts; original trail, Explorer TV vault, Play Zone, every nav page and the Save and backup screen open with no page errors.
+Not tested: a real Android tablet or PC browser, touch tracing by finger, narration and music by ear, audio ducking, Eevee evolution end to end (needs 3 real days of cvc practice), the shiny roll odds.

@@ -1,0 +1,12 @@
+global.window={QuestProgress:{save(){}}};global.document={};
+require('./skills.js');require('./stops-10a.js');
+const S=window.QuestSkills;const st={g:{}};S.attach(st);
+for(let i=0;i<10;i++)S.record('magicE',{firstTry:true,ms:1200});
+let k=S._skill('magicE');console.log('level after 10 first-try:',k.level);
+for(let i=0;i<10;i++)S.record('magicE',{firstTry:false,retries:2});
+k=S._skill('magicE');console.log('level after 10 misses:',k.level,'grit',S.gritAvailable());
+console.log('tryIt new:',S.tryIt('food','poke'),'dup:',S.tryIt('food','poke'));
+console.log('support lvl1:',JSON.stringify(S.support('cvc')));
+const rt=JSON.parse(JSON.stringify(st.g.skills10));rt.per.magicE.level=99;rt.grit='x';rt.per.bogus={};
+const san=S.sanitize(rt);console.log('sanitized:',san.per.magicE.level,san.grit,Object.keys(san.per));
+console.log('stops:',window.WORLDS_10A.map(w=>w.id+':'+w.quests.length).join(','),'games',Object.keys(window.PLAY10A).join(','));
